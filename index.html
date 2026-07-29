@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JP Dev Tools — Developer tools that save you hours</title>
+    <meta name="description" content="Cheat sheets, Notion templates, automation kits, and free browser tools for developers. Stop Googling syntax.">
+    <meta property="og:title" content="JP Dev Tools — Developer tools that save you hours">
+    <meta property="og:description" content="Cheat sheets, Notion templates, automation kits, and free browser tools for developers.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://jamiedcphillips.github.io/jp-dev-tools/">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box}
+        :root{--primary:#2563EB;--primary-dark:#1E40AF;--accent:#F59E0B;--bg:#0F172A;--surface:#1E293B;--surface-2:#334155;--text:#F8FAFC;--text-muted:#94A3B8;--success:#10B981;--border:#334155}
+        html{scroll-behavior:smooth}
+        body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.7}
+        a{color:var(--primary);text-decoration:none}
+        a:hover{text-decoration:underline}
+        .container{max-width:1100px;margin:0 auto;padding:0 1.5rem}
+
+        /* Nav */
+        nav{background:var(--surface);border-bottom:1px solid var(--border);padding:1rem 0;position:sticky;top:0;z-index:100;backdrop-filter:blur(10px)}
+        nav .container{display:flex;justify-content:space-between;align-items:center}
+        .nav-brand{font-weight:800;font-size:1.15rem;color:var(--text)}
+        .nav-brand span{color:var(--primary)}
+        .nav-links a{color:var(--text-muted);margin-left:1.5rem;font-size:0.9rem;font-weight:500}
+        .nav-links a:hover{color:var(--primary);text-decoration:none}
+
+        /* Hero */
+        .hero{padding:6rem 0 4rem;text-align:center}
+        .hero h1{font-size:3rem;font-weight:800;line-height:1.15;margin-bottom:1.5rem;background:linear-gradient(135deg,var(--text) 0%,var(--primary) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+        .hero p{font-size:1.25rem;color:var(--text-muted);max-width:600px;margin:0 auto 2rem}
+        .hero-cta{display:inline-flex;gap:1rem;flex-wrap:wrap;justify-content:center}
+        .btn{display:inline-block;padding:0.8rem 2rem;border-radius:8px;font-weight:600;font-size:1rem;transition:all 0.2s;border:none;cursor:pointer;font-family:inherit}
+        .btn-primary{background:var(--primary);color:white}
+        .btn-primary:hover{background:var(--primary-dark);text-decoration:none;transform:translateY(-1px)}
+        .btn-secondary{background:transparent;color:var(--text);border:2px solid var(--border)}
+        .btn-secondary:hover{border-color:var(--primary);color:var(--primary);text-decoration:none}
+
+        /* Social proof */
+        .proof{display:flex;justify-content:center;gap:3rem;padding:2rem 0;margin:2rem 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+        .proof-item{text-align:center}
+        .proof-item .num{font-size:1.8rem;font-weight:800;color:var(--accent)}
+        .proof-item .label{font-size:0.8rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.05em}
+
+        /* Products */
+        .products{padding:4rem 0}
+        .section-title{text-align:center;margin-bottom:3rem}
+        .section-title h2{font-size:2rem;font-weight:700;margin-bottom:0.5rem}
+        .section-title p{color:var(--text-muted)}
+        .product-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:1.5rem}
+        .product-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:2rem;transition:all 0.2s;position:relative;overflow:hidden}
+        .product-card:hover{border-color:var(--primary);transform:translateY(-3px);box-shadow:0 10px 40px rgba(37,99,235,0.15)}
+        .product-card .emoji{font-size:2.5rem;margin-bottom:1rem;display:block}
+        .product-card h3{font-size:1.1rem;margin-bottom:0.5rem}
+        .product-card p{color:var(--text-muted);font-size:0.9rem;margin-bottom:1rem;min-height:3rem}
+        .product-card .price{font-size:1.5rem;font-weight:700;color:var(--accent);margin-bottom:1rem}
+        .product-card .features{list-style:none;margin-bottom:1.5rem}
+        .product-card .features li{color:var(--text-muted);font-size:0.85rem;padding:0.2rem 0}
+        .product-card .features li::before{content:'✓ ';color:var(--success)}
+        .badge-popular{position:absolute;top:1rem;right:1rem;background:var(--accent);color:var(--bg);padding:0.2rem 0.6rem;border-radius:4px;font-size:0.7rem;font-weight:700;text-transform:uppercase}
+
+        /* Free tools */
+        .free-tools{padding:4rem 0;background:var(--surface);margin:0 -100vw;padding-left:100vw;padding-right:100vw}
+        .free-tools-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center}
+        .free-tools h2{font-size:2rem;font-weight:700;margin-bottom:1rem}
+        .free-tools p{color:var(--text-muted);margin-bottom:1.5rem}
+        .tool-grid{display:grid;grid-template-columns:1fr 1fr;gap:0.5rem}
+        .tool-tag{background:var(--bg);padding:0.4rem 0.8rem;border-radius:6px;font-size:0.8rem;color:var(--text-muted);text-align:center}
+
+        /* Email capture */
+        .email-capture{padding:5rem 0;text-align:center}
+        .email-capture h2{font-size:2rem;font-weight:700;margin-bottom:0.5rem}
+        .email-capture p{color:var(--text-muted);margin-bottom:2rem}
+        .email-form{display:flex;gap:0.5rem;max-width:450px;margin:0 auto}
+        .email-form input{flex:1;padding:0.8rem 1rem;background:var(--surface);border:1px solid var(--border);border-radius:8px;color:var(--text);font-family:inherit;font-size:0.95rem}
+        .email-form input:focus{outline:none;border-color:var(--primary)}
+        .email-form button{padding:0.8rem 1.5rem;background:var(--primary);color:white;border:none;border-radius:8px;font-weight:600;cursor:pointer;font-family:inherit;white-space:nowrap}
+        .email-form button:hover{background:var(--primary-dark)}
+        .email-note{color:var(--text-muted);font-size:0.75rem;margin-top:0.5rem}
+
+        /* FAQ */
+        .faq{padding:4rem 0}
+        .faq-list{max-width:700px;margin:0 auto}
+        details{background:var(--surface);border:1px solid var(--border);border-radius:8px;margin-bottom:0.5rem;overflow:hidden}
+        summary{padding:1rem 1.5rem;cursor:pointer;font-weight:500;list-style:none;display:flex;justify-content:space-between;align-items:center}
+        summary::after{content:'+';font-size:1.2rem;color:var(--text-muted);transition:transform 0.2s}
+        details[open] summary::after{content:'−'}
+        details p{padding:0 1.5rem 1rem;color:var(--text-muted);font-size:0.9rem}
+
+        /* Footer */
+        footer{padding:3rem 0;border-top:1px solid var(--border);text-align:center}
+        .footer-links{display:flex;justify-content:center;gap:2rem;margin-bottom:1rem;flex-wrap:wrap}
+        .footer-links a{color:var(--text-muted);font-size:0.85rem}
+        .footer-copy{color:var(--surface-2);font-size:0.8rem}
+
+        @media(max-width:768px){
+            .hero h1{font-size:2rem}
+            .proof{flex-direction:column;gap:1rem}
+            .free-tools-inner{grid-template-columns:1fr}
+            .email-form{flex-direction:column}
+            .nav-links{display:none}
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="container">
+            <div class="nav-brand">⚡ <span>JP Dev Tools</span></div>
+            <div class="nav-links">
+                <a href="#products">Products</a>
+                <a href="#free-tools">Free Tools</a>
+                <a href="blog/">Blog</a>
+                <a href="docs/">Docs</a>
+                <a href="#faq">FAQ</a>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="container">
+            <h1>Developer tools that<br>save you hours</h1>
+            <p>Cheat sheets, templates, automation kits, and free browser tools. Built by a developer, for developers.</p>
+            <div class="hero-cta">
+                <a href="#products" class="btn btn-primary">Browse Products</a>
+                <a href="https://jamiedcphillips.github.io/free-dev-tools/" class="btn btn-secondary">Try Free Tools →</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="container">
+        <div class="proof">
+            <div class="proof-item"><div class="num">6</div><div class="label">Cheat Sheets</div></div>
+            <div class="proof-item"><div class="num">25</div><div class="label">Templates</div></div>
+            <div class="proof-item"><div class="num">12</div><div class="label">Free Tools</div></div>
+            <div class="proof-item"><div class="num">100</div><div class="label">Email Templates</div></div>
+        </div>
+    </section>
+
+    <section class="products" id="products">
+        <div class="container">
+            <div class="section-title">
+                <h2>Products</h2>
+                <p>Everything you need to code faster and work smarter</p>
+            </div>
+            <div class="product-grid">
+                <div class="product-card">
+                    <span class="emoji">📋</span>
+                    <h3>Developer Cheat Sheet Bundle</h3>
+                    <p>6 comprehensive quick references for the tools you use daily</p>
+                    <div class="price">£7</div>
+                    <ul class="features">
+                        <li>Python 3.13, Git, Docker</li>
+                        <li>SQL, Regex, Bash/CLI</li>
+                        <li>200+ lines each</li>
+                        <li>Markdown format</li>
+                    </ul>
+                    <a href="https://jamiedcphillips.gumroad.com/l/bhaer" class="btn btn-primary" style="width:100%;text-align:center">Get the Bundle</a>
+                </div>
+
+                <div class="product-card">
+                    <span class="badge-popular">Popular</span>
+                    <span class="emoji">🗂️</span>
+                    <h3>Notion Productivity System</h3>
+                    <p>25 professional templates for developer productivity</p>
+                    <div class="price">£9</div>
+                    <ul class="features">
+                        <li>Sprint planning, bug tracker</li>
+                        <li>Code review, API docs</li>
+                        <li>Works on free plan</li>
+                        <li>Import in seconds</li>
+                    </ul>
+                    <a href="https://jamiedcphillips.gumroad.com/l/iibmof" class="btn btn-primary" style="width:100%;text-align:center">Get Templates</a>
+                </div>
+
+                <div class="product-card">
+                    <span class="emoji">🎬</span>
+                    <h3>YouTube Automation Kit</h3>
+                    <p>Run a faceless tech/finance YouTube channel on autopilot</p>
+                    <div class="price">£19</div>
+                    <ul class="features">
+                        <li>Script templates</li>
+                        <li>Thumbnail designs</li>
+                        <li>SEO keyword guide</li>
+                        <li>Automation scripts</li>
+                    </ul>
+                    <a href="https://jamiedcphillips.gumroad.com/l/eklhxq" class="btn btn-primary" style="width:100%;text-align:center">Get the Kit</a>
+                </div>
+
+                <div class="product-card">
+                    <span class="emoji">📧</span>
+                    <h3>Email Marketing Templates</h3>
+                    <p>100 ready-to-send templates for SaaS, ecommerce, freelancers</p>
+                    <div class="price">£12</div>
+                    <ul class="features">
+                        <li>Welcome sequences</li>
+                        <li>Sales & launch emails</li>
+                        <li>Cart recovery flows</li>
+                        <li>Re-engagement campaigns</li>
+                    </ul>
+                    <a href="https://jamiedcphillips.gumroad.com/l/sdlvq" class="btn btn-primary" style="width:100%;text-align:center">Get Templates</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="free-tools" id="free-tools">
+        <div class="free-tools-inner">
+            <div>
+                <h2>🔧 Free Developer Tools</h2>
+                <p>12 browser-based tools that run entirely client-side. No signup. No tracking. No ads. Your data never leaves your machine.</p>
+                <a href="https://jamiedcphillips.github.io/free-dev-tools/" class="btn btn-primary">Open Free Tools →</a>
+            </div>
+            <div class="tool-grid">
+                <span class="tool-tag">JSON Formatter</span>
+                <span class="tool-tag">Base64 Codec</span>
+                <span class="tool-tag">URL Encoder</span>
+                <span class="tool-tag">Hash Generator</span>
+                <span class="tool-tag">UUID Generator</span>
+                <span class="tool-tag">Regex Tester</span>
+                <span class="tool-tag">Color Converter</span>
+                <span class="tool-tag">Lorem Ipsum</span>
+                <span class="tool-tag">JWT Decoder</span>
+                <span class="tool-tag">Timestamp Tool</span>
+                <span class="tool-tag">CSS Minifier</span>
+                <span class="tool-tag">Markdown Preview</span>
+            </div>
+        </div>
+    </section>
+
+    <section class="email-capture" id="newsletter">
+        <div class="container">
+            <h2>Get dev tips & free resources</h2>
+            <p>Join the newsletter. One email per week — no spam, unsubscribe anytime.</p>
+            <form class="email-form" action="https://formspree.io/f/xpwzgvqk" method="POST">
+                <input type="email" name="email" placeholder="your@email.com" required>
+                <input type="hidden" name="_subject" value="New JP Dev Tools subscriber">
+                <button type="submit">Subscribe</button>
+            </form>
+            <div class="email-note">We respect your privacy. No spam, ever.</div>
+        </div>
+    </section>
+
+    <section class="faq" id="faq">
+        <div class="container">
+            <div class="section-title">
+                <h2>Frequently Asked Questions</h2>
+            </div>
+            <div class="faq-list">
+                <details open>
+                    <summary>What format are the cheat sheets in?</summary>
+                    <p>Markdown (.md) files. Open in VS Code, Obsidian, any text editor, or convert to PDF with Pandoc. They render beautifully everywhere.</p>
+                </details>
+                <details>
+                    <summary>Can I get a refund?</summary>
+                    <p>Yes — Gumroad offers a 30-day refund policy. If you're not satisfied, request a refund through your Gumroad receipt email. No questions asked.</p>
+                </details>
+                <details>
+                    <summary>Do I get free updates?</summary>
+                    <p>Yes. All product updates are free for existing customers. Gumroad notifies you automatically when a new version is available.</p>
+                </details>
+                <details>
+                    <summary>Do the Notion templates work on the free plan?</summary>
+                    <p>Yes. All 25 templates are designed for Notion's free tier. No paid features required.</p>
+                </details>
+                <details>
+                    <summary>Can I use these at work?</summary>
+                    <p>Absolutely. The templates and cheat sheets are for personal and internal business use. Use them in your team, your projects, wherever. You just can't resell them.</p>
+                </details>
+                <details>
+                    <summary>Are the free tools really free?</summary>
+                    <p>100% free. No signup, no tracking, no ads. They run entirely in your browser — your data never touches our servers. Open source compatible.</p>
+                </details>
+                <details>
+                    <summary>Can I request a new cheat sheet?</summary>
+                    <p>Yes! We're always adding new content. Popular requests get prioritized. Use the newsletter signup to stay updated on new releases.</p>
+                </details>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-links">
+                <a href="https://jamiedcphillips.gumroad.com/">Gumroad Store</a>
+                <a href="https://jamiedcphillips.github.io/free-dev-tools/">Free Tools</a>
+                <a href="blog/">Blog</a>
+                <a href="docs/">Documentation</a>
+            </div>
+            <div class="footer-copy">© 2026 JP Dev Tools — Built by <a href="https://jamiedcphillips.gumroad.com/" style="color:var(--text-muted)">Jamie Phillips</a></div>
+        </div>
+    </footer>
+
+    <img src="https://counter.dev/tracker.gif?referrer=jp-dev-tools" style="display:none" alt="">
+</body>
+</html>
