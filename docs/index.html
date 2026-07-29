@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JP Dev Tools — Documentation & Knowledge Base</title>
+    <meta name="description" content="Documentation and knowledge base for JP Dev Tools — setup guides, API reference, and product documentation.">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --primary: #2563EB; --secondary: #1E40AF; --accent: #F59E0B;
+            --bg: #0F172A; --surface: #1E293B; --surface-2: #334155;
+            --text: #F8FAFC; --text-muted: #94A3B8; --success: #10B981;
+            --border: #334155;
+        }
+        body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); line-height: 1.7; }
+        .layout { display: flex; min-height: 100vh; }
+        
+        /* Sidebar */
+        .sidebar { width: 280px; background: var(--surface); border-right: 1px solid var(--border); padding: 2rem 1rem; position: fixed; height: 100vh; overflow-y: auto; }
+        .sidebar h2 { font-size: 1rem; color: var(--primary); margin: 1.5rem 0 0.5rem; padding-left: 0.5rem; }
+        .sidebar h2:first-child { margin-top: 0; }
+        .sidebar a { display: block; padding: 0.4rem 0.8rem; color: var(--text-muted); text-decoration: none; border-radius: 6px; font-size: 0.9rem; transition: all 0.15s; }
+        .sidebar a:hover, .sidebar a.active { background: var(--primary)20; color: var(--primary); }
+        .sidebar .brand { font-size: 1.2rem; font-weight: 700; color: var(--text); margin-bottom: 1.5rem; padding: 0.5rem; border-bottom: 1px solid var(--border); }
+        .sidebar .brand span { color: var(--primary); }
+        
+        /* Main content */
+        .main { margin-left: 280px; flex: 1; padding: 3rem; max-width: 820px; }
+        h1 { font-size: 2rem; margin-bottom: 0.5rem; color: var(--text); }
+        h2 { font-size: 1.5rem; margin: 2rem 0 0.75rem; color: var(--accent); border-bottom: 1px solid var(--border); padding-bottom: 0.3rem; }
+        h3 { font-size: 1.15rem; margin: 1.5rem 0 0.5rem; color: var(--text); }
+        p { margin-bottom: 1rem; color: var(--text-muted); }
+        .lead { font-size: 1.1rem; color: var(--text); margin-bottom: 2rem; }
+        
+        code { font-family: 'JetBrains Mono', monospace; background: var(--surface); padding: 0.15rem 0.4rem; border-radius: 4px; font-size: 0.85rem; }
+        pre { background: var(--surface); padding: 1.2rem; border-radius: 8px; overflow-x: auto; margin: 1rem 0; border: 1px solid var(--border); }
+        pre code { background: none; padding: 0; }
+        
+        .card-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 1rem; margin: 1.5rem 0; }
+        .card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 1.5rem; transition: border-color 0.2s; }
+        .card:hover { border-color: var(--primary); }
+        .card h3 { margin-top: 0; font-size: 1rem; }
+        .card p { font-size: 0.85rem; margin-bottom: 0.5rem; }
+        .card a { color: var(--primary); text-decoration: none; font-size: 0.85rem; }
+        
+        .badge { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 4px; font-size: 0.75rem; font-weight: 600; }
+        .badge-live { background: var(--success)30; color: var(--success); }
+        .badge-new { background: var(--accent)30; color: var(--accent); }
+        
+        table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
+        th, td { padding: 0.6rem 1rem; text-align: left; border-bottom: 1px solid var(--border); }
+        th { color: var(--text); font-weight: 600; background: var(--surface); }
+        td { color: var(--text-muted); }
+        
+        ul, ol { margin: 0.5rem 0 1rem 1.5rem; color: var(--text-muted); }
+        li { margin-bottom: 0.3rem; }
+        
+        .section { display: none; }
+        .section.active { display: block; }
+        
+        .search-box { width: 100%; padding: 0.6rem 1rem; background: var(--surface-2); border: 1px solid var(--border); border-radius: 8px; color: var(--text); font-family: inherit; font-size: 0.9rem; margin-bottom: 1rem; }
+        .search-box:focus { outline: none; border-color: var(--primary); }
+        
+        @media (max-width: 768px) {
+            .sidebar { display: none; }
+            .main { margin-left: 0; padding: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="layout">
+        <nav class="sidebar">
+            <div class="brand">⚡ <span>JP Dev Tools</span></div>
+            <input type="text" class="search-box" placeholder="Search docs..." id="search">
+            
+            <h2>Getting Started</h2>
+            <a href="#overview" class="active" onclick="show('overview')">Overview</a>
+            <a href="#products" onclick="show('products')">Products</a>
+            <a href="#free-tools" onclick="show('free-tools')">Free Tools</a>
+            
+            <h2>Product Docs</h2>
+            <a href="#cheatsheets" onclick="show('cheatsheets')">Cheat Sheet Bundle</a>
+            <a href="#notion" onclick="show('notion')">Notion Templates</a>
+            <a href="#youtube-kit" onclick="show('youtube-kit')">YouTube Kit</a>
+            <a href="#email-templates" onclick="show('email-templates')">Email Templates</a>
+            
+            <h2>Guides</h2>
+            <a href="#setup" onclick="show('setup')">Setup & Installation</a>
+            <a href="#customization" onclick="show('customization')">Customization</a>
+            <a href="#integrations" onclick="show('integrations')">Integrations</a>
+            
+            <h2>Support</h2>
+            <a href="#faq" onclick="show('faq')">FAQ</a>
+            <a href="#contact" onclick="show('contact')">Contact</a>
+            <a href="#changelog" onclick="show('changelog')">Changelog</a>
+        </nav>
+        
+        <main class="main">
+            <!-- Overview -->
+            <div id="overview" class="section active">
+                <h1>JP Dev Tools Documentation</h1>
+                <p class="lead">Developer tools that save you hours. Cheat sheets, templates, automation kits, and free browser tools.</p>
+                
+                <div class="card-grid">
+                    <div class="card">
+                        <h3>🔧 Dev Cheat Sheets</h3>
+                        <p>6 comprehensive references for Python, Git, Docker, SQL, Regex, Bash</p>
+                        <span class="badge badge-live">LIVE</span>
+                        <br><a href="#cheatsheets" onclick="show('cheatsheets')">View docs →</a>
+                    </div>
+                    <div class="card">
+                        <h3>📋 Notion Templates</h3>
+                        <p>25 productivity templates for developers. Works on free plan.</p>
+                        <span class="badge badge-live">LIVE</span>
+                        <br><a href="#notion" onclick="show('notion')">View docs →</a>
+                    </div>
+                    <div class="card">
+                        <h3>🎬 YouTube Kit</h3>
+                        <p>Faceless YouTube automation — scripts, thumbnails, SEO</p>
+                        <span class="badge badge-live">LIVE</span>
+                        <br><a href="#youtube-kit" onclick="show('youtube-kit')">View docs →</a>
+                    </div>
+                    <div class="card">
+                        <h3>📧 Email Templates</h3>
+                        <p>100 email marketing templates for SaaS, ecommerce, freelancers</p>
+                        <span class="badge badge-new">NEW</span>
+                        <br><a href="#email-templates" onclick="show('email-templates')">View docs →</a>
+                    </div>
+                </div>
+                
+                <h2>Quick Links</h2>
+                <ul>
+                    <li><a href="https://jamiedcphillips.github.io/free-dev-tools/" style="color:var(--primary)">Free Developer Tools</a> — 12 browser tools, no signup</li>
+                    <li><a href="https://jamiedcphillips.gumroad.com/" style="color:var(--primary)">Gumroad Store</a> — All paid products</li>
+                    <li><a href="https://jamiedcphillips.github.io/jp-dev-tools/blog/" style="color:var(--primary)">Blog</a> — Dev tips and tutorials</li>
+                </ul>
+            </div>
+            
+            <!-- Products -->
+            <div id="products" class="section">
+                <h1>Products</h1>
+                <p class="lead">All JP Dev Tools products with pricing and links.</p>
+                <table>
+                    <tr><th>Product</th><th>Price</th><th>Format</th><th>Link</th></tr>
+                    <tr><td>Developer Cheat Sheet Bundle</td><td>£7</td><td>Markdown</td><td><a href="https://jamiedcphillips.gumroad.com/l/bhaer" style="color:var(--primary)">Buy</a></td></tr>
+                    <tr><td>Notion Productivity System</td><td>£9</td><td>Notion Templates</td><td><a href="https://jamiedcphillips.gumroad.com/l/iibmof" style="color:var(--primary)">Buy</a></td></tr>
+                    <tr><td>YouTube Automation Kit</td><td>£19</td><td>Scripts + Templates</td><td><a href="https://jamiedcphillips.gumroad.com/l/eklhxq" style="color:var(--primary)">Buy</a></td></tr>
+                    <tr><td>Email Marketing Templates</td><td>£12</td><td>HTML + Markdown</td><td><a href="https://jamiedcphillips.gumroad.com/l/sdlvq" style="color:var(--primary)">Buy</a></td></tr>
+                </table>
+            </div>
+            
+            <!-- Free Tools -->
+            <div id="free-tools" class="section">
+                <h1>Free Developer Tools</h1>
+                <p class="lead">12 browser-based tools. No signup. No tracking. No ads.</p>
+                <p>Visit: <a href="https://jamiedcphillips.github.io/free-dev-tools/" style="color:var(--primary)">jamiedcphillips.github.io/free-dev-tools/</a></p>
+                <h3>Available Tools</h3>
+                <ul>
+                    <li>JSON Formatter & Validator</li>
+                    <li>Base64 Encoder/Decoder</li>
+                    <li>URL Encoder/Decoder</li>
+                    <li>Hash Generator (MD5, SHA-1, SHA-256)</li>
+                    <li>UUID Generator</li>
+                    <li>Regex Tester</li>
+                    <li>Color Converter</li>
+                    <li>Lorem Ipsum Generator</li>
+                    <li>JWT Decoder</li>
+                    <li>Unix Timestamp Converter</li>
+                    <li>CSS Minifier</li>
+                    <li>Markdown Preview</li>
+                </ul>
+                <p>All tools run entirely in your browser — your data never leaves your machine.</p>
+            </div>
+            
+            <!-- Cheat Sheets -->
+            <div id="cheatsheets" class="section">
+                <h1>Developer Cheat Sheet Bundle</h1>
+                <p class="lead">6 comprehensive, well-organized cheat sheets covering the most in-demand developer tools.</p>
+                <h2>What's Included</h2>
+                <table>
+                    <tr><th>Sheet</th><th>Lines</th><th>Key Topics</th></tr>
+                    <tr><td>Python 3.13</td><td>200+</td><td>Data types, comprehensions, OOP, async/await, type hints, pattern matching</td></tr>
+                    <tr><td>Git</td><td>200+</td><td>Branching, rebase, cherry-pick, bisect, stash, reflog, aliases</td></tr>
+                    <tr><td>Docker</td><td>200+</td><td>Dockerfile best practices, multi-stage builds, compose, networking, security</td></tr>
+                    <tr><td>SQL</td><td>200+</td><td>JOINs with ASCII diagrams, CTEs, window functions, indexes, optimization</td></tr>
+                    <tr><td>Regex</td><td>200+</td><td>Character classes, quantifiers, lookahead/lookbehind, PCRE vs Python vs JS</td></tr>
+                    <tr><td>Bash/CLI</td><td>200+</td><td>Text processing (grep/sed/awk), scripting patterns, one-liners</td></tr>
+                </table>
+                <h2>Format</h2>
+                <p>Beautifully formatted Markdown (<code>.md</code>) files. Open in any editor, VS Code, Obsidian, or convert to PDF with Pandoc:</p>
+                <pre><code>pandoc python-cheatsheet.md -o python-cheatsheet.pdf --pdf-engine=xelatex</code></pre>
+                <h2>Get It</h2>
+                <p><a href="https://jamiedcphillips.gumroad.com/l/bhaer" style="color:var(--primary);font-weight:600;">Buy on Gumroad — £7 →</a></p>
+            </div>
+            
+            <!-- Notion -->
+            <div id="notion" class="section">
+                <h1>Notion Productivity System</h1>
+                <p class="lead">25 professional templates for developer productivity. All work on Notion's free plan.</p>
+                <h2>Templates Included</h2>
+                <ul>
+                    <li>Sprint Planning Board</li>
+                    <li>Bug Tracker</li>
+                    <li>Code Review Checklist</li>
+                    <li>API Documentation Template</li>
+                    <li>Meeting Notes with Action Items</li>
+                    <li>1:1 Meeting Template</li>
+                    <li>OKR Tracker</li>
+                    <li>Technical Decision Log (ADR)</li>
+                    <li>Interview Prep Tracker</li>
+                    <li>Learning & Course Tracker</li>
+                    <li>...and 15 more</li>
+                </ul>
+                <h2>Setup</h2>
+                <ol>
+                    <li>Download the template pack from Gumroad</li>
+                    <li>Open each <code>.md</code> file</li>
+                    <li>In Notion, use <strong>Import → Markdown</strong></li>
+                    <li>Customize to your workflow</li>
+                </ol>
+                <p><a href="https://jamiedcphillips.gumroad.com/l/iibmof" style="color:var(--primary);font-weight:600;">Buy on Gumroad — £9 →</a></p>
+            </div>
+            
+            <!-- YouTube Kit -->
+            <div id="youtube-kit" class="section">
+                <h1>Faceless YouTube Automation Kit</h1>
+                <p class="lead">Everything you need to run a faceless tech/finance YouTube channel with automation.</p>
+                <h2>Contents</h2>
+                <ul>
+                    <li>Script templates for tech explainer, tutorial, and listicle videos</li>
+                    <li>Thumbnail design templates (Canva-compatible)</li>
+                    <li>SEO keyword research guide</li>
+                    <li>Content calendar template</li>
+                    <li>Automation scripts for scheduling and publishing</li>
+                    <li>Monetization strategy guide</li>
+                </ul>
+                <p><a href="https://jamiedcphillips.gumroad.com/l/eklhxq" style="color:var(--primary);font-weight:600;">Buy on Gumroad — £19 →</a></p>
+            </div>
+            
+            <!-- Email Templates -->
+            <div id="email-templates" class="section">
+                <h1>100 Email Marketing Templates</h1>
+                <p class="lead">Ready-to-send email templates for SaaS, ecommerce, and freelancers.</p>
+                <h2>Categories</h2>
+                <ul>
+                    <li><strong>Welcome Sequences</strong> — 10 templates for onboarding new subscribers</li>
+                    <li><strong>Sales Emails</strong> — 15 templates for product launches and promotions</li>
+                    <li><strong>SaaS</strong> — 20 templates for trials, upgrades, churn prevention</li>
+                    <li><strong>Ecommerce</strong> — 20 templates for cart recovery, upsells, reviews</li>
+                    <li><strong>Freelancer</strong> — 15 templates for proposals, follow-ups, invoicing</li>
+                    <li><strong>Newsletter</strong> — 10 templates for weekly/monthly digests</li>
+                    <li><strong>Re-engagement</strong> — 10 templates for inactive subscribers</li>
+                </ul>
+                <p><a href="https://jamiedcphillips.gumroad.com/l/sdlvq" style="color:var(--primary);font-weight:600;">Buy on Gumroad — £12 →</a></p>
+            </div>
+            
+            <!-- Setup -->
+            <div id="setup" class="section">
+                <h1>Setup & Installation</h1>
+                <p class="lead">How to use JP Dev Tools products.</p>
+                <h2>Cheat Sheets</h2>
+                <p>Download the ZIP from Gumroad. Extract anywhere. Open <code>.md</code> files in:</p>
+                <ul>
+                    <li>VS Code (built-in Markdown preview: <code>Ctrl+Shift+V</code>)</li>
+                    <li>Obsidian (drag into vault)</li>
+                    <li>Any text editor</li>
+                    <li>GitHub (renders Markdown natively)</li>
+                </ul>
+                <h2>Notion Templates</h2>
+                <ol>
+                    <li>Extract the ZIP</li>
+                    <li>Open Notion → Settings → Import → Markdown & CSV</li>
+                    <li>Select the template files</li>
+                    <li>Templates appear in your workspace</li>
+                </ol>
+            </div>
+            
+            <!-- Customization -->
+            <div id="customization" class="section">
+                <h1>Customization</h1>
+                <p>All products are designed to be customized. Markdown files can be edited in any text editor. Notion templates can be modified after import.</p>
+                <h2>Adding Your Own Content</h2>
+                <p>Cheat sheets use standard Markdown. Add your own sections, examples, or notes:</p>
+                <pre><code>## My Custom Section
+
+### Pattern I Use Often
+```python
+# Your custom snippet here
+result = [x for x in data if x.valid]
+```</code></pre>
+            </div>
+            
+            <!-- Integrations -->
+            <div id="integrations" class="section">
+                <h1>Integrations</h1>
+                <p>JP Dev Tools products work with your existing workflow.</p>
+                <h2>Compatible With</h2>
+                <ul>
+                    <li><strong>VS Code</strong> — Markdown preview, snippets</li>
+                    <li><strong>Obsidian</strong> — Knowledge management</li>
+                    <li><strong>Notion</strong> — Direct import</li>
+                    <li><strong>GitHub</strong> — Native Markdown rendering</li>
+                    <li><strong>Pandoc</strong> — PDF/DOCX conversion</li>
+                    <li><strong>Any text editor</strong> — Plain Markdown</li>
+                </ul>
+            </div>
+            
+            <!-- FAQ -->
+            <div id="faq" class="section">
+                <h1>Frequently Asked Questions</h1>
+                <details open><summary><strong>What format are the cheat sheets in?</strong></summary><p>Markdown (.md) files. Open in any text editor, VS Code, Obsidian, or convert to PDF.</p></details>
+                <details><summary><strong>Can I get a refund?</strong></summary><p>Yes — Gumroad offers a 30-day refund policy. Request through your receipt email.</p></details>
+                <details><summary><strong>Do I get updates?</strong></summary><p>Yes. All updates are free for existing customers. Gumroad notifies you automatically.</p></details>
+                <details><summary><strong>Can I use these commercially?</strong></summary><p>For personal and internal business use. You cannot resell them, but you can use them in your work and teams.</p></details>
+                <details><summary><strong>Do the Notion templates work on the free plan?</strong></summary><p>Yes. All 25 templates work on Notion's free tier. No paid features required.</p></details>
+                <details><summary><strong>How do I report a bug?</strong></summary><p>Use the contact form on our landing page. We fix issues and push updates within 48 hours.</p></details>
+                <details><summary><strong>Can I request a new cheat sheet?</strong></summary><p>Absolutely! Send us your request and we prioritize popular ones.</p></details>
+            </div>
+            
+            <!-- Contact -->
+            <div id="contact" class="section">
+                <h1>Contact & Support</h1>
+                <p>Need help? Here's how to reach us:</p>
+                <ul>
+                    <li><strong>Product issues:</strong> Reply to your Gumroad receipt email</li>
+                    <li><strong>Feature requests:</strong> Use the contact form on our <a href="https://jamiedcphillips.github.io/jp-dev-tools/" style="color:var(--primary)">landing page</a></li>
+                    <li><strong>Bug reports:</strong> File via the landing page contact form</li>
+                </ul>
+                <p>We respond within 48 hours.</p>
+            </div>
+            
+            <!-- Changelog -->
+            <div id="changelog" class="section">
+                <h1>Changelog</h1>
+                <h3>v1.0.0 — July 2026</h3>
+                <ul>
+                    <li>🚀 Initial launch</li>
+                    <li>📦 Developer Cheat Sheet Bundle (6 sheets)</li>
+                    <li>📋 Notion Productivity System (25 templates)</li>
+                    <li>🎬 Faceless YouTube Automation Kit</li>
+                    <li>📧 Email Marketing Templates (100 templates)</li>
+                    <li>🔧 Free Developer Tools (12 browser tools)</li>
+                    <li>📖 Documentation site launched</li>
+                    <li>📝 Blog with SEO content</li>
+                </ul>
+            </div>
+        </main>
+    </div>
+    
+    <script>
+    function show(id) {
+        document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+        document.querySelectorAll('.sidebar a').forEach(a => a.classList.remove('active'));
+        document.getElementById(id).classList.add('active');
+        document.querySelector(`a[href="#${id}"]`).classList.add('active');
+    }
+    
+    // Search
+    document.getElementById('search').addEventListener('input', function(e) {
+        const q = e.target.value.toLowerCase();
+        if (!q) { show('overview'); return; }
+        const sections = document.querySelectorAll('.section');
+        let found = false;
+        sections.forEach(s => {
+            if (s.textContent.toLowerCase().includes(q) && !found) {
+                show(s.id);
+                found = true;
+            }
+        });
+    });
+    
+    // Hash routing
+    if (window.location.hash) {
+        const id = window.location.hash.slice(1);
+        if (document.getElementById(id)) show(id);
+    }
+    </script>
+    <img src="https://counter.dev/tracker.gif?referrer=jp-dev-tools-docs" style="display:none" alt="">
+</body>
+</html>
