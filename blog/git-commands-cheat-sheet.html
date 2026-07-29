@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Git Commands Cheat Sheet — Beyond the Basics (2026)</title>
+    <meta name="description" content="Advanced Git cheat sheet: rebase, bisect, reflog, cherry-pick, stash strategies. Go beyond git add/commit/push.">
+    <meta name="keywords" content="git cheat sheet, git commands, git rebase, git advanced">
+    <meta property="og:title" content="Git Commands Cheat Sheet — Beyond the Basics (2026)">
+    <meta property="og:description" content="Advanced Git cheat sheet: rebase, bisect, reflog, cherry-pick, stash strategies. Go beyond git add/commit/push.">
+    <meta property="og:type" content="article">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: #0F172A; color: #F8FAFC; line-height: 1.7; }
+        .container { max-width: 720px; margin: 0 auto; padding: 2rem; }
+        h1 { font-size: 2rem; margin: 2rem 0 1rem; color: #2563EB; }
+        h2 { font-size: 1.4rem; margin: 2rem 0 0.5rem; color: #F59E0B; }
+        p { margin-bottom: 1rem; }
+        pre { background: #1E293B; padding: 1rem; border-radius: 8px; overflow-x: auto; margin: 1rem 0; }
+        code { font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; }
+        ul { margin: 1rem 0; padding-left: 1.5rem; }
+        li { margin-bottom: 0.3rem; }
+        a { color: #2563EB; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        .cta { background: #2563EB; color: white; padding: 1rem 2rem; border-radius: 8px; display: inline-block; margin: 1rem 0; font-weight: 600; }
+        .cta:hover { background: #1E40AF; text-decoration: none; }
+        .meta { color: #94A3B8; font-size: 0.85rem; margin-bottom: 2rem; }
+        nav { padding: 1rem 0; border-bottom: 1px solid #1E293B; margin-bottom: 2rem; }
+        nav a { color: #F8FAFC; margin-right: 1rem; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav>
+            <a href="https://jamiedcphillips.github.io/jp-dev-tools/">Home</a>
+            <a href="https://jamiedcphillips.github.io/jp-dev-tools/blog/">Blog</a>
+            <a href="https://jamiedcphillips.github.io/free-dev-tools/">Free Tools</a>
+        </nav>
+        <article>
+            <h1>Git Commands Cheat Sheet — Beyond the Basics (2026)</h1>
+            <div class="meta">By Jamie Phillips · July 2026 · JP Dev Tools</div>
+            
+    <section>
+        <h2>Git Beyond Add-Commit-Push</h2>
+        <p>Most developers use 5 git commands. There are hundreds. The gap between 'I know git' and 'I really know git' is worth 10x productivity.</p>
+    </section>
+    <section>
+        <h2>Commands You Should Know</h2>
+        <p><ul><li>`git reflog` — recover 'lost' commits</li>
+<li>`git bisect` — binary search for bugs</li>
+<li>`git stash -p` — stash specific changes</li>
+<li>`git cherry-pick` — grab commits from other branches</li>
+<li>`git rebase -i` — rewrite history cleanly</li>
+<li>`git worktree` — work on multiple branches simultaneously</ul></li></p>
+    </section>
+    <section>
+        <h2>Pro Tip: Git Aliases</h2>
+        <p><pre><code class="language-bash">git config --global alias.lg 'log --oneline --graph --all'
+git config --global alias.unstage 'reset HEAD --'
+git config --global alias.last 'log -1 HEAD'
+</code></pre></p>
+    </section>
+    <section>
+        <h2>Get the Full Cheat Sheet</h2>
+        <p>6 comprehensive cheat sheets (Python, Git, Docker, SQL, Regex, Bash) for £7.</p>
+    </section>
+            <p><a href="https://jamiedcphillips.gumroad.com/l/bhaer" class="cta">Get Developer Cheat Sheet Bundle — £7</a></p>
+        </article>
+    </div>
+    <img src="https://counter.dev/tracker.gif?referrer=git-commands-cheat-sheet" style="display:none" alt="">
+</body>
+</html>
